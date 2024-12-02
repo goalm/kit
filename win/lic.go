@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/goalm/kit/sys"
 	"gopkg.in/yaml.v3"
+	"log"
 	"os"
 )
 
@@ -33,7 +34,7 @@ func LoadYamlLicense(vaultPath string, licFile string, expDate string) bool {
 	if err != nil {
 		panic(err)
 	}
-
+	log.Println(expDate)
 	// step 1: check if the UUID is in the list
 	isInUserList := func() bool {
 		for _, value := range users.UUIDs {
@@ -41,6 +42,7 @@ func LoadYamlLicense(vaultPath string, licFile string, expDate string) bool {
 				return true
 			}
 		}
+		log.Println("Please reach out to Molly / Martin to register your machine ID.")
 		fmt.Println("Please reach out to Molly / Martin to register your machine ID.")
 		return false
 	}()
@@ -48,6 +50,7 @@ func LoadYamlLicense(vaultPath string, licFile string, expDate string) bool {
 	// step 2: check if the license is still valid
 	isBeforeExp := sys.IsBefore(expDate)
 	if !isBeforeExp {
+		log.Println("Please reach out to Molly / Martin to request an updated version.")
 		fmt.Println("Please reach out to Molly / Martin to request an updated version.")
 		return false
 	}
