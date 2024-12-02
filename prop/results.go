@@ -1,4 +1,4 @@
-package read
+package prop
 
 import (
 	"github.com/goalm/api"
